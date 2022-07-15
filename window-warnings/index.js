@@ -1,10 +1,9 @@
-const OpenhabXStateMachine = require('@openhab-toolbox/xstate');
-const machineFactory = require('./machine');
-const {
-  items,
-  triggers: { ItemStateChangeTrigger },
-  rules: { JSRule },
-} = require('openhab');
+import OpenhabXStateMachine from '@openhab-toolbox/xstate';
+import machineFactory from './machine';
+import { items, triggers, rules } from 'openhab';
+
+const { ItemStateChangeTrigger } = triggers;
+const { JSRule } = rules;
 
 module.exports = function createWindowWarning(
   { windowContacts, temperatureItem, temperatureLimit = 16, timeFactor = 1 },

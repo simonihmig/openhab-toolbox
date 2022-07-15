@@ -3,7 +3,7 @@ import { createMachine, assign } from 'xstate';
 const timeFactor = 1000;
 const targetTemperature = 20;
 
-const machine = createMachine(
+export default createMachine(
   {
     id: 'window',
     initial: 'closed',

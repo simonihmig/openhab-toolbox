@@ -1,7 +1,7 @@
-const { createMachine } = require('xstate');
-const logger = require('./log');
+import { createMachine } from 'xstate';
+import logger from './log';
 
-const machine = createMachine(
+export default createMachine(
   {
     id: 'alarm',
     initial: 'idle',
@@ -97,5 +97,3 @@ const machine = createMachine(
     },
   }
 );
-
-module.exports = machine;

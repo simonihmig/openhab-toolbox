@@ -1,13 +1,11 @@
-const {
-  triggers: { ItemStateUpdateTrigger, ItemStateChangeTrigger },
-  rules: { JSRule },
-  items,
-  log,
-} = require('openhab');
-const { interpret } = require('xstate');
-const { normalizeConfig, prefixCamelCased } = require('./utils');
+import { triggers, rules, items, log } from 'openhab';
+import { interpret } from 'xstate';
+import { normalizeConfig, prefixCamelCased } from './utils';
 
-class OpenhabXStateMachine {
+const { ItemStateChangeTrigger, ItemStateUpdateTrigger } = triggers;
+const { JSRule } = rules;
+
+export default class OpenhabXStateMachine {
   constructor(name, machine, xstateConfig, context = {}) {
     this.xstateConfig = xstateConfig;
 
@@ -74,7 +72,7 @@ class OpenhabXStateMachine {
         : ItemStateUpdateTrigger(itemName, state)
     );
 
-    const rule = JSRule({
+    JSRule({
       name: `${this.name} - event "${event}"`,
       triggers,
       execute: (args) => {
@@ -84,5 +82,3 @@ class OpenhabXStateMachine {
     });
   }
 }
-
-module.exports = OpenhabXStateMachine;
