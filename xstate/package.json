@@ -1,0 +1,14 @@
+{
+  "name": "@openhab-toolbox/xstate",
+  "version": "0.0.0",
+  "author": "Simon Ihmig <simon.ihmig@gmail.com>",
+  "description": "Use xstate as a state machine for openhab rules",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "openhab": "^2.0.1"
+  },
+  "devDependencies": {
+    "openhab": "^2.0.1"
+  }
+}

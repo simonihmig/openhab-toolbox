@@ -1,0 +1,20 @@
+{
+  "name": "@openhab-toolbox/window-warnings",
+  "version": "0.0.0",
+  "description": "Alarm system for openhab",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Simon Ihmig <simon.ihmig@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "openhab": "^2.0.1"
+  },
+  "dependencies": {
+    "@openhab-toolbox/xstate": "^0.0.0"
+  },
+  "devDependencies": {
+    "openhab": "^2.0.1"
+  }
+}

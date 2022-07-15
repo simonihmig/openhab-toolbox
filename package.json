@@ -1,0 +1,13 @@
+{
+  "version": "0.0.0",
+  "author": "Simon Ihmig <simon.ihmig@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "*"
+  ],
+  "volta": {
+    "node": "12.22.12",
+    "yarn": "1.22.19"
+  }
+}
