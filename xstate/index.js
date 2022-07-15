@@ -7,8 +7,6 @@ const { JSRule } = rules;
 
 export default class OpenhabXStateMachine {
   constructor(name, machine, xstateConfig, context = {}) {
-    this.xstateConfig = xstateConfig;
-
     this.name = name;
     this.logger = log(name);
     const { events, ...machineConfig } = xstateConfig;
