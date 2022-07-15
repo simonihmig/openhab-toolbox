@@ -1,12 +1,12 @@
-import { createMachine, assign } from "xstate";
+import { createMachine, assign } from 'xstate';
 
 const timeFactor = 1000;
 const targetTemperature = 20;
 
 const machine = createMachine(
   {
-    id: "window",
-    initial: "closed",
+    id: 'window',
+    initial: 'closed',
     context: {
       temperature: 20,
     },
@@ -14,7 +14,7 @@ const machine = createMachine(
       closed: {
         on: {
           open: {
-            target: "open",
+            target: 'open',
           },
         },
       },
@@ -23,34 +23,34 @@ const machine = createMachine(
           {
             delay: ({ temperature }) =>
               Math.max(0, (targetTemperature - temperature) * timeFactor),
-            target: "warning",
-            cond: "isTooCold",
+            target: 'warning',
+            cond: 'isTooCold',
           },
         ],
         on: {
           close: {
-            target: "closed",
+            target: 'closed',
           },
           setTemperature: {
-            target: "open",
+            target: 'open',
             internal: false,
-            actions: ["setTemperature"],
+            actions: ['setTemperature'],
           },
         },
       },
       warning: {
         on: {
           close: {
-            target: "closed",
+            target: 'closed',
           },
         },
-        entry: ["warning"],
-        activities: ["warning"],
+        entry: ['warning'],
+        activities: ['warning'],
       },
     },
     on: {
       setTemperature: {
-        actions: ["setTemperature"],
+        actions: ['setTemperature'],
       },
     },
   },

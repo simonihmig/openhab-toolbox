@@ -5,5 +5,11 @@
   "private": true,
   "workspaces": [
     "*"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
 }

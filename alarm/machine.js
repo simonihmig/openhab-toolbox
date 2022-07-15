@@ -1,79 +1,78 @@
-const { createMachine } = require("xstate");
+const { createMachine } = require('xstate');
 const logger = require('./log');
 
 const machine = createMachine(
   {
-    id: "alarm",
-    initial: "idle",
+    id: 'alarm',
+    initial: 'idle',
     states: {
       idle: {
         on: {
           ARM: {
-            target: "armed",
+            target: 'armed',
           },
         },
       },
       armed: {
-        initial: "pending",
+        initial: 'pending',
         states: {
           pending: {
             after: [
               {
-                delay: "ARMED_ACTIVE",
-                target: "active",
+                delay: 'ARMED_ACTIVE',
+                target: 'active',
               },
             ],
             on: {
               SENSOR: {
                 target: undefined,
               },
-            }
+            },
           },
-          active: {
-          },
+          active: {},
         },
         on: {
           DISARM: {
-            target: "idle",
+            target: 'idle',
           },
           SENSOR: {
-            target: "alarm",
+            target: 'alarm',
           },
         },
-        activities: ["signalArmed"],
+        activities: ['signalArmed'],
       },
       alarm: {
         on: {
           DISARM: {
-            target: "idle",
+            target: 'idle',
           },
         },
-        activities: ["signalAlarm"],
+        activities: ['signalAlarm'],
       },
       intrusion: {
-        initial: "silent",
+        initial: 'silent',
         states: {
           silent: {
             after: [
               {
-                delay: "INTRUSION_SILENT",
-                target: "warning",
+                delay: 'INTRUSION_SILENT',
+                target: 'warning',
               },
             ],
           },
           warning: {
-            activities: ["signalWarning"],
+            activities: ['signalWarning'],
           },
         },
         after: [
           {
-            delay: "INTRUSION_ALARM",
-            target: "alarm",
+            delay: 'INTRUSION_ALARM',
+            target: 'alarm',
           },
         ],
         on: {
           DISARM: {
-            target: "idle",
+            target: 'idle',
           },
         },
       },
@@ -87,13 +86,13 @@ const machine = createMachine(
     },
     activities: {
       signalAlarm: () => {
-        logger.error("ALARM");
+        logger.error('ALARM');
       },
       signalArmed: () => {
-        logger.info("ARMED");
+        logger.info('ARMED');
       },
       signalWarning: () => {
-        logger.warn("WARNING");
+        logger.warn('WARNING');
       },
     },
   }
