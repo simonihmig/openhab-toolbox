@@ -1,99 +1,141 @@
 import { createMachine } from 'xstate';
-import logger from './log';
 
-export default createMachine(
+const machine = createMachine(
   {
     id: 'alarm',
     initial: 'idle',
     states: {
       idle: {
         on: {
-          ARM: {
-            target: 'armed',
+          arm: {
+            target: 'arming',
           },
         },
       },
-      armed: {
+      arming: {
         initial: 'pending',
         states: {
-          pending: {
+          ready: {
+            type: 'final',
+          },
+          waiting: {
             after: [
               {
                 delay: 'ARMED_ACTIVE',
-                target: 'active',
+                target: 'ready',
               },
             ],
-            on: {
-              SENSOR: {
-                target: undefined,
+          },
+          pending: {
+            type: 'parallel',
+            states: {
+              disarm: {
+                initial: 'check',
+                states: {
+                  check: {
+                    always: [
+                      { target: 'blocked', cond: 'hasDisarm' },
+                      { target: 'ready', cond: 'noDisarm' },
+                    ],
+                  },
+                  blocked: {
+                    on: {
+                      disarmChanged: {
+                        target: 'ready',
+                        cond: 'noDisarn',
+                      },
+                    },
+                  },
+                  ready: {
+                    type: 'final',
+                  },
+                },
+              },
+              sensor: {
+                initial: 'check',
+                states: {
+                  check: {
+                    always: [
+                      { target: 'blocked', cond: 'hasSensor' },
+                      { target: 'ready', cond: 'noSensor' },
+                    ],
+                  },
+                  blocked: {
+                    on: {
+                      sensorChanged: {
+                        target: 'ready',
+                        cond: 'noSensor',
+                      },
+                    },
+                  },
+                  ready: {
+                    type: 'final',
+                    on: {
+                      sensor: {
+                        target: 'blocked',
+                      },
+                    },
+                  },
+                },
               },
             },
-          },
-          active: {},
-        },
-        on: {
-          DISARM: {
-            target: 'idle',
-          },
-          SENSOR: {
-            target: 'alarm',
+            onDone: 'waiting',
           },
         },
-        activities: ['signalArmed'],
+
+        onDone: 'armed',
       },
-      alarm: {
+      armed: {
         on: {
-          DISARM: {
-            target: 'idle',
-          },
+          sensor: 'alarm',
+          entry: 'entry',
         },
-        activities: ['signalAlarm'],
       },
-      intrusion: {
-        initial: 'silent',
+      alarm: {},
+      entry: {
+        initial: 'waiting',
         states: {
-          silent: {
+          waiting: {
             after: [
               {
-                delay: 'INTRUSION_SILENT',
+                delay: 'ENTRY_WARNING',
                 target: 'warning',
               },
             ],
           },
           warning: {
-            activities: ['signalWarning'],
+            after: [
+              {
+                delay: 'ENTRY_ALARM',
+                target: 'timeout',
+              },
+            ],
+          },
+          timeout: {
+            type: 'final',
           },
         },
-        after: [
-          {
-            delay: 'INTRUSION_ALARM',
-            target: 'alarm',
-          },
-        ],
-        on: {
-          DISARM: {
-            target: 'idle',
-          },
-        },
+        onDone: 'alarm',
       },
+    },
+    on: {
+      disarm: 'idle',
     },
   },
   {
     delays: {
-      INTRUSION_SILENT: 2000,
-      INTRUSION_ALARM: 4000,
-      ARMED_ACTIVE: 2000,
+      ENTRY_WARNING: 5000,
+      ENTRY_ALARM: 5000,
+      ARMED_ACTIVE: 5000,
     },
-    activities: {
-      signalAlarm: () => {
-        logger.error('ALARM');
-      },
-      signalArmed: () => {
-        logger.info('ARMED');
-      },
-      signalWarning: () => {
-        logger.warn('WARNING');
-      },
+
+    guards: {
+      hasSensor: () => false,
+      noSensor: () => true,
+      hasDisarm: () => false,
+      noDisarm: () => true,
     },
   }
 );
+
+export default machine;
