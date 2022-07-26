@@ -11,6 +11,8 @@ const machine = createMachine(
             target: 'arming',
           },
         },
+        entry: ['idle'],
+        activities: ['idle'],
       },
       arming: {
         initial: 'pending',
@@ -25,6 +27,8 @@ const machine = createMachine(
                 target: 'ready',
               },
             ],
+            entry: ['arming.waiting'],
+            activities: ['arming.waiting'],
           },
           pending: {
             type: 'parallel',
@@ -45,6 +49,8 @@ const machine = createMachine(
                         cond: 'noDisarn',
                       },
                     },
+                    entry: ['arming.pending.disarm'],
+                    activities: ['arming.pending.disarm'],
                   },
                   ready: {
                     type: 'final',
@@ -67,6 +73,8 @@ const machine = createMachine(
                         cond: 'noSensor',
                       },
                     },
+                    entry: ['arming.pending.sensor'],
+                    activities: ['arming.pending.sensor'],
                   },
                   ready: {
                     type: 'final',
@@ -80,18 +88,27 @@ const machine = createMachine(
               },
             },
             onDone: 'waiting',
+            entry: ['arming.pending'],
+            activities: ['arming.pending'],
           },
         },
 
         onDone: 'armed',
+        entry: ['arming'],
+        activities: ['arming'],
       },
       armed: {
         on: {
           sensor: 'alarm',
           entry: 'entry',
         },
+        entry: ['armed'],
+        activities: ['armed'],
       },
-      alarm: {},
+      alarm: {
+        entry: ['alarm'],
+        activities: ['alarm'],
+      },
       entry: {
         initial: 'waiting',
         states: {
@@ -102,6 +119,8 @@ const machine = createMachine(
                 target: 'warning',
               },
             ],
+            entry: ['entry.waiting'],
+            activities: ['entry.waiting'],
           },
           warning: {
             after: [
@@ -110,12 +129,16 @@ const machine = createMachine(
                 target: 'timeout',
               },
             ],
+            entry: ['entry.warning'],
+            activities: ['entry.warning'],
           },
           timeout: {
             type: 'final',
           },
         },
         onDone: 'alarm',
+        entry: ['entry'],
+        activities: ['entry'],
       },
     },
     on: {
