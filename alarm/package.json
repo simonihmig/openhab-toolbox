@@ -1,5 +1,5 @@
 {
-  "name": "@openhab-toolbox/window-warnings",
+  "name": "@openhab-toolbox/alarm",
   "version": "0.0.0",
   "description": "Alarm system for openhab",
   "main": "index.js",

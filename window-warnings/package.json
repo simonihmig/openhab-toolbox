@@ -1,5 +1,5 @@
 {
-  "name": "openhab-window-warnings",
+  "name": "@openhab-toolbox/window-warnings",
   "version": "0.1.0",
   "description": "Warn when windows are open for too long",
   "main": "index.js",
