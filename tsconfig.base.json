@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "inlineSources": true,
+    "inlineSourceMap": true,
+    "newLine": "LF",
+    "strict": true,
+    "baseUrl": "./packages",
+    "composite": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "tsBuildInfoFile": "./.build-cache/tsconfig.tsbuildinfo",
+    "paths": {
+      "@openhab-toolbox/alarm": ["alarm/src"],
+      "@openhab-toolbox/window-warnings": ["window-warnings/src"],
+      "@openhab-toolbox/xstate": ["openhab-xstate/src"]
+    }
+  }
+}

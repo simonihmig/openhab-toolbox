@@ -1,12 +1,9 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.base",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": ".",
     "tsBuildInfoFile": "./.build-cache/tsconfig.tsbuildinfo"
   },
-  "include": [
-    "src",
-    "tests"
-  ]
+  "include": ["src", "tests"]
 }

@@ -1,12 +1,10 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.base",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": ".",
     "tsBuildInfoFile": "./.build-cache/tsconfig.tsbuildinfo"
   },
-  "include": [
-    "src",
-    "tests"
-  ]
+  "references": [{ "path": "../openhab-xstate" }],
+  "include": ["src", "tests"]
 }
