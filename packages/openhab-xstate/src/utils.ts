@@ -1,6 +1,6 @@
 import { items } from 'openhab';
 
-function makeAction(action) {
+function makeAction(action: any) {
   if (typeof action === 'object') {
     return () => {
       for (const [itemName, value] of Object.entries(action)) {
@@ -12,7 +12,7 @@ function makeAction(action) {
   return action;
 }
 
-export function normalizeConfig(machineConfig, logger) {
+export function normalizeConfig(machineConfig: any, logger: any) {
   const actions = Object.fromEntries(
     Object.entries(machineConfig.actions ?? {}).map((key, action) => [
       key,
@@ -30,6 +30,6 @@ export function normalizeConfig(machineConfig, logger) {
   return { ...machineConfig, actions, activities };
 }
 
-export function prefixCamelCased(prefix, name) {
+export function prefixCamelCased(prefix: any, name: any) {
   return prefix + name.charAt(0).toUpperCase() + name.slice(1);
 }

@@ -5,8 +5,16 @@ import { items, triggers, rules } from 'openhab';
 const { ItemStateChangeTrigger } = triggers;
 const { JSRule } = rules;
 
-module.exports = function createWindowWarning(
-  { windowContacts, temperatureItem, temperatureLimit = 16, timeFactor = 1 },
+interface WindowWarningOptions {
+  windowContacts: string[];
+  temperatureItem: string;
+  targetTemperatureItem: string;
+  delayBase: number;
+  delayExponent: number;
+}
+
+export default function createWindowWarning(
+  { windowContacts, temperatureItem, temperatureLimit = 16, timeFactor = 1 }: WindowWarningOptions,
   machineConfig = {}
 ) {
   if (!windowContacts) {

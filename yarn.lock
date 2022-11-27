@@ -8,14 +8,14 @@
   integrity sha512-oeaetlodcqVsiZDxnEcqsbs+sXBkASxua0mXs5OXuPQXz3/wdPTMlxwfQ4z2HKcOik3S9voW3QJkp/KLWDhvRQ==
 
 "@js-joda/timezone@^2.11.1":
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/@js-joda/timezone/-/timezone-2.12.0.tgz#a0b89ec5b4b2a53c0837f0308503ba5ecc8abc5f"
-  integrity sha512-1bpkGU3bh80wqR1TCpMXpgpwVs7RpIkYmq75JIGl+NRFIKEhE3qHYBtS4EFSAkVxCTZSj6b9dolr8ijq36GJEQ==
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/@js-joda/timezone/-/timezone-2.12.2.tgz#6182edde24fd6f6c8f5331a52157bb1ba7e2441e"
+  integrity sha512-sKuM0MISl0IBinHbhR7PToykPmw2NniEwIPXrhP1EsEgyWL3IJ0MglzqU5i4XLH4asaZ/tKjA4UqbpZLEWKTmA==
 
 openhab@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/openhab/-/openhab-2.0.1.tgz#8fb9d88fa673a40c8ea2f05c962874ab02593a9c"
-  integrity sha512-DO+kRYawX5/iLeYDvbNpHJD7bdXwia3YLFHEczdsNE8BMj/sHhbmfhp90f6KyIsNtb1Os18en1CUbduMNznQzQ==
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/openhab/-/openhab-2.0.2.tgz#a2511f0e7c77eb31a7f8405c49d96524f4927904"
+  integrity sha512-F0HWnamRnv6kVdKp6kFkQj9RrIiw0eo5kXYN9MJ7Yb/VRjxFYzhwNPrmmHJvXN2DXPgNU9IjV+t6ov9SeAL0lw==
   dependencies:
     "@js-joda/core" "^4.3.1"
     "@js-joda/timezone" "^2.11.1"
@@ -31,7 +31,12 @@ prettier@^2.7.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
   integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
 
+typescript@^4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
+  integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==
+
 xstate@^4.32.1:
-  version "4.32.1"
-  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.32.1.tgz#1a09c808a66072938861a3b4acc5b38460244b70"
-  integrity sha512-QYUd+3GkXZ8i6qdixnOn28bL3EvA++LONYL/EMWwKlFSh/hiLndJ8YTnz77FDs+JUXcwU7NZJg7qoezoRHc4GQ==
+  version "4.33.6"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.33.6.tgz#9e23f78879af106f1de853aba7acb2bc3b1eb950"
+  integrity sha512-A5R4fsVKADWogK2a43ssu8Fz1AF077SfrKP1ZNyDBD8lNa/l4zfR//Luofp5GSWehOQr36Jp0k2z7b+sH2ivyg==

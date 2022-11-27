@@ -2,11 +2,15 @@
   "name": "@openhab-toolbox/window-warnings",
   "version": "0.1.0",
   "description": "Warn when windows are open for too long",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Simon Ihmig <simon.ihmig@gmail.com>",
+  "main": "dist/csrc/index.js",
+  "typings": "dist/src/index.d.ts",
+  "files": [
+    "dist/*/src"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "openhab": "^2.0.1"
@@ -16,9 +20,5 @@
   },
   "devDependencies": {
     "openhab": "^2.0.1"
-  },
-  "volta": {
-    "node": "12.22.12",
-    "yarn": "1.22.19"
   }
 }

@@ -2,12 +2,16 @@
   "name": "@openhab-toolbox/alarm",
   "version": "0.0.0",
   "description": "Alarm system for openhab",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Simon Ihmig <simon.ihmig@gmail.com>",
   "license": "MIT",
+  "main": "dist/csrc/index.js",
+  "typings": "dist/src/index.d.ts",
+  "files": [
+    "dist/*/src"
+  ],
   "peerDependencies": {
     "openhab": "^2.0.1"
   },
@@ -16,9 +20,5 @@
   },
   "devDependencies": {
     "openhab": "^2.0.1"
-  },
-  "volta": {
-    "node": "12.22.12",
-    "yarn": "1.22.19"
   }
 }

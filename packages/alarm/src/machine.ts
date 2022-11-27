@@ -3,6 +3,7 @@ import { createMachine } from 'xstate';
 const machine = createMachine(
   {
     id: 'alarm',
+    schema: {},
     initial: 'idle',
     states: {
       idle: {
