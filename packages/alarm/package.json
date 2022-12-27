@@ -16,7 +16,8 @@
     "openhab": "^2.0.1"
   },
   "dependencies": {
-    "@openhab-toolbox/xstate": "^0.0.0"
+    "@openhab-toolbox/xstate": "^0.0.0",
+    "xstate": "^4.35.1"
   },
   "devDependencies": {
     "openhab": "^2.0.1"

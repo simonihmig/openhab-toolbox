@@ -11,6 +11,7 @@
   "files": [
     "dist/*/src"
   ],
+  "private": true,
   "license": "MIT",
   "peerDependencies": {
     "openhab": "^2.0.1"

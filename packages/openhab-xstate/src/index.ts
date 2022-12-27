@@ -1,12 +1,14 @@
 import { items, log, rules, triggers } from 'openhab';
-import { interpret, MachineConfig, StateMachine } from 'xstate';
-import { normalizeConfig, prefixCamelCased } from './utils';
-import {
+import type {
   ConditionPredicate,
   EventObject,
-  InternalMachineOptions,
+  InterpreterFrom,
+  MachineConfig,
+  StateMachine,
   StateSchema,
-} from 'xstate/lib/types';
+} from 'xstate';
+import { interpret } from 'xstate';
+import { normalizeConfig, prefixCamelCased } from './utils';
 
 const { ItemStateChangeTrigger, ItemStateUpdateTrigger } = triggers;
 const { JSRule } = rules;
@@ -20,9 +22,9 @@ type EventsConfig = Record<string, EventConfig>;
 type ItemsActions = Record<string, string>;
 
 interface OpenhabCustomConfig {
-  events: EventsConfig;
-  activities: Record<string, ItemsActions>;
-  actions: Record<string, ItemsActions>;
+  events?: EventsConfig;
+  activities?: Record<string, ItemsActions>;
+  actions?: Record<string, ItemsActions>;
 }
 
 export type OpenhabXStateConfig<
@@ -38,7 +40,7 @@ export default class OpenhabXStateMachine<
   private readonly name: string;
   private readonly logger: ReturnType<typeof log>;
 
-  public service;
+  public service: InterpreterFrom<StateMachine<TContext, TStateSchema, TEvent>>;
 
   constructor(
     name: string,
@@ -51,7 +53,7 @@ export default class OpenhabXStateMachine<
     const { events, ...machineConfig } = xstateConfig;
 
     machine = machine.withConfig({
-      guards: this.createGuards(events),
+      guards: events ? this.createGuards(events) : {},
       ...normalizeConfig(machineConfig, this.logger),
     });
 
@@ -65,7 +67,9 @@ export default class OpenhabXStateMachine<
       this.logger.info(`Transitioned to ${JSON.stringify(state.value)}`);
     });
 
-    this.setupRules(events);
+    if (events) {
+      this.setupRules(events);
+    }
   }
 
   createGuards(events: EventsConfig) {

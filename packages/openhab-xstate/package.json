@@ -16,6 +16,6 @@
     "openhab": "^2.0.1"
   },
   "dependencies": {
-    "xstate": "^4.32.1"
+    "xstate": "^4.35.1"
   }
 }

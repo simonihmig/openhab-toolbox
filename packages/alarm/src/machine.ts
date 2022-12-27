@@ -1,9 +1,22 @@
 import { createMachine } from 'xstate';
 
+type AlarmEvents =
+  | { type: 'arm' }
+  | { type: 'disarm' }
+  | { type: 'sensor' }
+  | { type: 'entry' }
+  | { type: 'disarmChanged' }
+  | { type: 'sensorChanged' };
+
 const machine = createMachine(
   {
     id: 'alarm',
-    schema: {},
+    predictableActionArguments: true,
+    schema: {
+      context: {},
+      events: {} as AlarmEvents,
+    },
+    tsTypes: {} as import('./machine.typegen').Typegen0,
     initial: 'idle',
     states: {
       idle: {
@@ -19,7 +32,7 @@ const machine = createMachine(
         initial: 'pending',
         states: {
           ready: {
-            type: 'final',
+            type: 'final' as const,
           },
           waiting: {
             after: [
@@ -32,7 +45,7 @@ const machine = createMachine(
             activities: ['arming.waiting'],
           },
           pending: {
-            type: 'parallel',
+            type: 'parallel' as const,
             states: {
               disarm: {
                 initial: 'check',
@@ -54,7 +67,7 @@ const machine = createMachine(
                     activities: ['arming.pending.disarm'],
                   },
                   ready: {
-                    type: 'final',
+                    type: 'final' as const,
                   },
                 },
               },
@@ -78,7 +91,7 @@ const machine = createMachine(
                     activities: ['arming.pending.sensor'],
                   },
                   ready: {
-                    type: 'final',
+                    type: 'final' as const,
                     on: {
                       sensor: {
                         target: 'blocked',
@@ -134,7 +147,7 @@ const machine = createMachine(
             activities: ['entry.warning'],
           },
           timeout: {
-            type: 'final',
+            type: 'final' as const,
           },
         },
         onDone: 'alarm',
